@@ -92,11 +92,15 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    window.ethereum.on('accountsChanged', async function (accounts) {
-      resetMetaMask();
-      handleOpenMeta();
-      router.push('/');
-    });
+    if(!window.ethereum) {
+      alert('Plesae install metamask!');
+    } else {
+      window.ethereum.on('accountsChanged', async function (accounts) {
+        resetMetaMask();
+        handleOpenMeta();
+        router.push('/');
+      });
+    }
   }, []);
 
   return (
